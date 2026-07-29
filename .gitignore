@@ -6,7 +6,6 @@ frontend/.next/
 
 # Runtime-generated knowledge index and uploaded copies
 backend/data/
-backend/utils/config.py
 
 # Local configuration
 .env
