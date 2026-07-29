@@ -7,4 +7,4 @@ langchain-openai==0.2.0
 langchain-community==0.3.0
 pypdf==5.0.1
 supabase==2.8.1
-langchain-groq==2.7.0
+langchain-groq==1.1.3
