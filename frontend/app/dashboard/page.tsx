@@ -1,0 +1,292 @@
+import {
+  ArrowRight,
+  BotMessageSquare,
+  FileStack,
+  MailCheck,
+  UploadCloud
+} from "lucide-react";
+import Link from "next/link";
+
+import { Layout } from "@/components/Layout";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from "@/components/ui/card";
+
+const uploadDocuments = [
+  {
+    id: "DOC-2418",
+    filename: "vaillant-ecoTEC-plus-stoercodes.pdf",
+    category: "Heating Manual",
+    uploadedBy: "Lea Petersen",
+    uploadedAt: "Today, 09:14",
+    status: "Indexed"
+  },
+  {
+    id: "DOC-2417",
+    filename: "kundendienst-faq-sanitaer-2026.pdf",
+    category: "Service FAQ",
+    uploadedBy: "Murat Kaya",
+    uploadedAt: "Today, 08:37",
+    status: "Indexed"
+  },
+  {
+    id: "DOC-2416",
+    filename: "wartungsprotokoll-waermepumpe-v3.pdf",
+    category: "Maintenance Protocol",
+    uploadedBy: "Nina Schubert",
+    uploadedAt: "Yesterday, 16:02",
+    status: "Processing"
+  }
+];
+
+const knowledgeChats = [
+  {
+    conversation: "Heizkreis pressure drop diagnosis",
+    askedBy: "Field Team",
+    time: "11:24",
+    sourceCount: 3,
+    confidence: "0.89"
+  },
+  {
+    conversation: "Warranty coverage for pump replacement",
+    askedBy: "Office",
+    time: "10:11",
+    sourceCount: 2,
+    confidence: "0.81"
+  },
+  {
+    conversation: "Error code F.22 escalation path",
+    askedBy: "Technician",
+    time: "09:52",
+    sourceCount: 4,
+    confidence: "0.92"
+  }
+];
+
+const recentServiceRequests = [
+  {
+    id: "SR-7841",
+    customer: "Baeckerei Nordlicht GmbH",
+    issue: "Backstube heating stops after 20 minutes",
+    priority: "High",
+    slot: "Tomorrow, 08:30-10:00"
+  },
+  {
+    id: "SR-7838",
+    customer: "Hausverwaltung Elbbruecke",
+    issue: "No hot water in building section B",
+    priority: "High",
+    slot: "Today, 15:00-17:00"
+  },
+  {
+    id: "SR-7832",
+    customer: "Friseursalon Karo",
+    issue: "Radiator valve leakage in waiting area",
+    priority: "Medium",
+    slot: "Tomorrow, 13:00-14:30"
+  }
+];
+
+const aiDrafts = [
+  {
+    id: "DF-9905",
+    type: "Follow-up Email",
+    recipient: "kontakt@elbbruecke-hv.de",
+    summary: "Appointment confirmation with prep checklist for tenants",
+    state: "Ready for review"
+  },
+  {
+    id: "DF-9902",
+    type: "Service Summary",
+    recipient: "ops@northlight-bakery.de",
+    summary: "Diagnosis notes and recommended thermostat replacement",
+    state: "Approved"
+  },
+  {
+    id: "DF-9898",
+    type: "Customer Update",
+    recipient: "team@friseur-karo.de",
+    summary: "Delay notification and updated arrival window",
+    state: "Ready for review"
+  }
+];
+
+export default function DashboardPage() {
+  return (
+    <Layout>
+      <div className="space-y-7">
+        <section className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div><p className="text-sm font-medium text-brand-700">Tuesday, July 29</p><h1 className="mt-1 text-2xl font-semibold tracking-tight text-slate-950">Good morning, Lea</h1><p className="mt-1 text-sm text-slate-500">Here’s what needs your attention across operations.</p></div>
+          <Link href="/intake"><Button>New service request</Button></Link>
+        </section>
+        <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <Card>
+            <CardHeader className="pb-2">
+              <CardDescription>Knowledge Base</CardDescription>
+              <CardTitle className="text-3xl">128</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-xs text-slate-500">Indexed documents across heating, plumbing, and electrical service.</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="pb-2">
+              <CardDescription>AI Answers Today</CardDescription>
+              <CardTitle className="text-3xl">46</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-xs text-slate-500">Average confidence 0.87 with source-backed responses.</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="pb-2">
+              <CardDescription>Open Service Requests</CardDescription>
+              <CardTitle className="text-3xl">19</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-xs text-slate-500">7 high-priority incidents require dispatch coordination.</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="pb-2">
+              <CardDescription>Drafts Pending Review</CardDescription>
+              <CardTitle className="text-3xl">8</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-xs text-slate-500">Customer emails and summaries generated by AI assistant.</p>
+            </CardContent>
+          </Card>
+        </section>
+
+        <section className="grid gap-4 xl:grid-cols-2">
+          <Card>
+            <CardHeader className="flex-row items-start justify-between space-y-0">
+              <div>
+                <CardTitle className="flex items-center gap-2">
+                  <UploadCloud className="h-4 w-4 text-brand-600" />
+                  Upload Documents
+                </CardTitle>
+                <CardDescription>Latest indexed manuals, checklists, and FAQs</CardDescription>
+              </div>
+              <Button variant="outline" size="sm">Upload PDF</Button>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {uploadDocuments.map((doc) => (
+                <div key={doc.id} className="rounded-lg border border-slate-200 p-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="truncate text-sm font-medium text-slate-900">{doc.filename}</p>
+                    <Badge variant={doc.status === "Indexed" ? "success" : "warning"}>{doc.status}</Badge>
+                  </div>
+                  <p className="mt-1 text-xs text-slate-500">
+                    {doc.category} - {doc.uploadedBy} - {doc.uploadedAt}
+                  </p>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex-row items-start justify-between space-y-0">
+              <div>
+                <CardTitle className="flex items-center gap-2">
+                  <BotMessageSquare className="h-4 w-4 text-brand-600" />
+                  Chat with Knowledge
+                </CardTitle>
+                <CardDescription>Recent grounded conversations from field and office teams</CardDescription>
+              </div>
+              <Button variant="outline" size="sm">Open Chat</Button>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {knowledgeChats.map((item) => (
+                <div key={item.conversation} className="rounded-lg border border-slate-200 p-3">
+                  <p className="text-sm font-medium text-slate-900">{item.conversation}</p>
+                  <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-slate-500">
+                    <span>{item.askedBy}</span>
+                    <span>-</span>
+                    <span>{item.time}</span>
+                    <span>-</span>
+                    <span>{item.sourceCount} sources</span>
+                    <span>-</span>
+                    <span>Confidence {item.confidence}</span>
+                  </div>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        </section>
+
+        <section className="grid gap-4 xl:grid-cols-2">
+          <Card>
+            <CardHeader className="flex-row items-start justify-between space-y-0">
+              <div>
+                <CardTitle className="flex items-center gap-2">
+                  <FileStack className="h-4 w-4 text-brand-600" />
+                  Recent Service Requests
+                </CardTitle>
+                <CardDescription>Most recent intake cases ready for assignment</CardDescription>
+              </div>
+              <Button variant="ghost" size="sm">
+                View all
+                <ArrowRight className="ml-1 h-3.5 w-3.5" />
+              </Button>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {recentServiceRequests.map((request) => (
+                <div key={request.id} className="rounded-lg border border-slate-200 p-3">
+                  <div className="flex items-center justify-between gap-2">
+                    <p className="text-sm font-semibold text-slate-900">{request.customer}</p>
+                    <Badge variant={request.priority === "High" ? "warning" : "secondary"}>
+                      {request.priority}
+                    </Badge>
+                  </div>
+                  <p className="mt-1 text-sm text-slate-700">{request.issue}</p>
+                  <p className="mt-2 text-xs text-slate-500">
+                    {request.id} - Planned slot: {request.slot}
+                  </p>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex-row items-start justify-between space-y-0">
+              <div>
+                <CardTitle className="flex items-center gap-2">
+                  <MailCheck className="h-4 w-4 text-brand-600" />
+                  AI Generated Drafts
+                </CardTitle>
+                <CardDescription>Communication drafts generated from service workflows</CardDescription>
+              </div>
+              <Button variant="ghost" size="sm">
+                Review queue
+                <ArrowRight className="ml-1 h-3.5 w-3.5" />
+              </Button>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {aiDrafts.map((draft) => (
+                <div key={draft.id} className="rounded-lg border border-slate-200 p-3">
+                  <div className="flex items-center justify-between gap-2">
+                    <p className="text-sm font-semibold text-slate-900">{draft.type}</p>
+                    <Badge variant={draft.state === "Approved" ? "success" : "secondary"}>
+                      {draft.state}
+                    </Badge>
+                  </div>
+                  <p className="mt-1 text-xs text-slate-500">
+                    {draft.id} - {draft.recipient}
+                  </p>
+                  <p className="mt-2 text-sm text-slate-700">{draft.summary}</p>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        </section>
+      </div>
+    </Layout>
+  );
+}

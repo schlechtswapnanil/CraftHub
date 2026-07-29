@@ -1,0 +1,10 @@
+CraftHub MVP Vertical Slice
+
+1) Upload documents (PDF/manual/FAQ)
+2) Chunk + embed + store vectors
+3) Retrieve top chunks for questions
+4) Generate answer with mandatory citations
+5) Intake new customer request
+6) Generate service ticket + follow-up email draft
+
+Frontend (Next.js) <-> Backend (FastAPI) <-> Supabase + Vector Index
