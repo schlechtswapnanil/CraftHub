@@ -1,6 +1,8 @@
 # CraftHub MVP
 
 AI-native operating hub MVP for German craft businesses (Handwerker).
+<img width="963" height="541" alt="image" src="https://github.com/user-attachments/assets/a70236e2-94d8-4f9a-bd03-a4f30c40676a" />
+
 
 ## Architecture
 
@@ -69,5 +71,10 @@ See `docs/deployment-handoff.md` for the exact Railway/Vercel handoff and post-d
 ## Notes
 
 - RAG services are intentionally scaffolded with clean interfaces and TODO markers.
+
+
 - `/upload` ingests PDFs, chunks content, and stores deterministic local lexical vectors for the MVP. The embedding interface can be swapped for an approved semantic provider in production.
+<img width="929" height="527" alt="image" src="https://github.com/user-attachments/assets/0b434936-ccf2-4de3-a3c4-14ac591f764c" />
+
 - `/chat` performs retrieval and returns `answer`, `sources`, and `confidence`.
+<img width="1467" height="925" alt="image" src="https://github.com/user-attachments/assets/59d9dc3e-cdd3-4486-8fc3-44e9f015a088" />
